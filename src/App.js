@@ -3,6 +3,7 @@ import './index.css';
 import StatisticsFeedback from './components/Statistics';
 import FeedbackOptions from './components/FeedbackOptions';
 import Section from './components/Section';
+import Container from './components/Container';
 
 class Feedback extends Component {
   state = {
@@ -16,8 +17,10 @@ class Feedback extends Component {
       ? Math.round((this.state.good * 100) / this.countTotalFeedback())
       : 0;
 
-  countTotalFeedback = () =>
-    this.state.good + this.state.neutral + this.state.bad;
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
 
   handleImcrement = e => {
     const btnName = e.currentTarget.textContent.toLowerCase();
@@ -32,23 +35,25 @@ class Feedback extends Component {
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
+
     return (
-      <Section title="Please leaven feedback">
-        <FeedbackOptions
-          options={this.state}
-          onLeaveFeedback={this.handleImcrement}
-        />
+      <Container>
+        <Section title="Please leaven feedback">
+          <FeedbackOptions
+            options={this.state}
+            onLeaveFeedback={this.handleImcrement}
+          />
 
-        {}
-
-        <StatisticsFeedback
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.countTotalFeedback()}
-          positivePercentage={this.countPositiveFeedbackPercentage()}
-        />
-      </Section>
+          <StatisticsFeedback
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />
+        </Section>
+      </Container>
     );
   }
 }

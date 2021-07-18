@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from '../Notification';
 import s from './Statistics.module.css';
@@ -13,13 +14,13 @@ const StatisticsFeedback = ({
     <h2 className={s.title}>Statistics</h2>
 
     {total > 0 ? (
-      <div>
-        <p>Good: {good}</p>
-        <p>Neutral: {neutral}</p>
-        <p>Bad: {bad}</p>
-        <p>Total: {total}</p>
+      <div className={s.container}>
+        <p className={s.text}>Good: {good}</p>
+        <p className={s.text}>Neutral: {neutral}</p>
+        <p className={s.text}>Bad: {bad}</p>
+        <p className={s.text}>Total: {total}</p>
 
-        <p>Positive feedback: {positivePercentage}%</p>
+        <p className={s.desc}>Positive feedback: {positivePercentage}%</p>
       </div>
     ) : (
       <Notification message="No feedback given" />
